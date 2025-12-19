@@ -10,9 +10,9 @@
 </head>
 <body>
 <script type="module">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js';
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/controls/OrbitControls.js';
-import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/loaders/GLTFLoader.js';
+import * as THREE from './three.module.js';
+import { OrbitControls } from './OrbitControls.js';
+import { GLTFLoader } from './GLTFLoader.js';
 
 // Scene & background
 const scene = new THREE.Scene();
@@ -27,7 +27,7 @@ const renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// OrbitControls
+// Controls
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.05;
@@ -56,12 +56,10 @@ window.addEventListener('resize', () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-// Animation loop
+// Animate
 function animate(){
     requestAnimationFrame(animate);
-    if(model) {
-        model.rotation.y += 0.005; // autospin
-    }
+    if(model) model.rotation.y += 0.005; // autospin
     controls.update();
     renderer.render(scene, camera);
 }
